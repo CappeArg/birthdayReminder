@@ -8,6 +8,7 @@ import { BirthdayCardComponent } from './Components/birthday-card/birthday-card.
 import { HomeComponent } from './Components/home/home.component';
 import { TodaysCardComponent } from './Components/todays-card/todays-card.component';
 import { HeaderComponent } from './Components/header/header.component';
+import { CustomerscrudComponent } from './Components/customerscrud/customerscrud.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +17,12 @@ import { HeaderComponent } from './Components/header/header.component';
     BirthdayCardComponent,
     HomeComponent,
     TodaysCardComponent,
-    HeaderComponent
+    HeaderComponent,
+    CustomerscrudComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
