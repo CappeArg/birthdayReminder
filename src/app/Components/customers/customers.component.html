@@ -1,1 +1,62 @@
-<p>customers works!</p>
+<div class="container">
+    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 rounded-3 border shadow-lg">
+        <h1>Customers</h1>
+        <div class="col-lg-6 p-3 p-lg-5 pt-lg-3">
+            <table class="table table-hover">
+
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Pablo</td>
+                        <td>Cappellacci</td>
+                        <td>pablo@cappe.net.ar</td>
+                        <td>06/07/1989</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Adrian</td>
+                        <td>Borella</td>
+                        <td></td>
+                        <td>28/10/1988</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-6 p-3 p-lg-5 pt-lg-3">
+            <form class="row g-3">
+                <div class="col-md-6">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="inputName">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputSurname" class="form-label">Surname</label>
+                    <input type="text" class="form-control" id="inputSurname">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="Email" class="form-control" id="inputEmail">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputBirthday" class="form-label">Birthday!</label>
+                    <input type="Date" class="form-control" id="inputBirthday">
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-danger m-1">Delete</button>
+                    <button type="submit" class="btn btn-warning m-1">Edit</button>
+                    <button type="submit" class="btn btn-success">Create</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
