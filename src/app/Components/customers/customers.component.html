@@ -31,51 +31,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Hardy</td>
-                        <td>Thomas </td>
-                        <td>thomashardy@mail.com</td>
-                        <td>01/01/2000</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Perrier</td>
-                        <td>Dominique</td>
-                        <td>dominiqueperrier@mail.com</td>
-                        <td>01/01/2000</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Anders</td>
-                        <td>Maria</td>
-                        <td>mariaanders@mail.com</td>
-                        <td>01/01/2000</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Wilson</td>
-                        <td>Fran</td>
-                        <td>franwilson@mail.com</td>
-                        <td>01/01/2000</td>
-                        <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Blank</td>
-                        <td>Martin</td>
-                        <td>martinblank@mail.com</td>
-                        <td>01/01/2000</td>
+                    <tr *ngFor="let customer of customers">
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.lastName}} </td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.birthday | date }}</td>
                         <td>
                             <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -84,7 +44,7 @@
                 </tbody>
             </table>
             <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Showing <b>{{customers.length}}</b> out of <b>{{customers.length</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
                     <li class="page-item"><a href="#" class="page-link">1</a></li>
