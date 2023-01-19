@@ -8,10 +8,10 @@ import { BirthdayCardComponent } from './Components/birthday-card/birthday-card.
 import { HomeComponent } from './Components/home/home.component';
 import { TodaysCardComponent } from './Components/todays-card/todays-card.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { CustomerscrudComponent } from './Components/customerscrud/customerscrud.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 
 import { HttpClientModule } from "@angular/common/http";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,13 +22,13 @@ import { HttpClientModule } from "@angular/common/http";
     HomeComponent,
     TodaysCardComponent,
     HeaderComponent,
-    CustomerscrudComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

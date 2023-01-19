@@ -26,6 +26,14 @@ export class CustomersServiceService {
       }
     })
   }
+//Maybe I can change an item like unvailable 
+  deleteCustomers(customer:Customer):Observable<any>{
+    return this.http.delete("http://127.0.0.1:8090/api/collections/customers/records/:id",{
+      params:{
+        path:customer.id
+      }
+    })
+  }
 
 
 
