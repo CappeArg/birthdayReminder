@@ -9,32 +9,28 @@ import { Customer } from '../Interfaces/customers';
 })
 export class CustomersServiceService {
 
+  path:string="http://127.0.0.1:8090/api/collections/customers/records"
+
   constructor(private http : HttpClient) { }
 
+
   getCustomers():Observable<any>{
-     return this.http.get("http://127.0.0.1:8090/api/collections/customers/records")
+     return this.http.get(this.path)
     }
   
   createCustomers(customer: Customer):Observable<any>{
-    return this.http.post("http://127.0.0.1:8090/api/collections/customers/records",customer)
+    return this.http.post(this.path,customer)
   };
 
   editCustomers(customer:Customer):Observable<any>{
-    return this.http.patch("http://127.0.0.1:8090/api/collections/customers/records/:id",customer, {
+    return this.http.patch(this.path + "/:id",customer, {
       params: {
         path: customer.id
       }
     })
   }
 //Maybe I can change an item like unvailable 
-  deleteCustomers(customer:Customer):Observable<any>{
-    return this.http.delete("http://127.0.0.1:8090/api/collections/customers/records/:id",{
-      params:{
-        path:customer.id
-      }
-    })
+  deleteCustomers(id:string):Observable<any>{
+    return this.http.delete(this.path + "/"+ id)
   }
-
-
-
-  }
+}

@@ -39,7 +39,7 @@
                         <td>{{customer.birthday | date }}</td>
                         <td>
                             <a (click)="editCustomerWindow()" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a (click)="deleteCustomer(customer)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
                 </tbody>
@@ -57,31 +57,31 @@
                 <!-- </ul> -->
             </div>
         </div>
-        <!-- Edit Modal HTML -->
+        <!-- ADD Modal HTML -->
         <!-- TODO: Ver clase para el modal, ver botones, ver validaciones, adaptar a angular -->
         <div *ngIf="addCustomerButton" id="addCustomerModal" class="animate__animated animate__bounceInRight">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form>
+                    <form (ngSubmit)="addCustomerForm(formAdd)" #formAdd="ngForm">
                         <div class="modal-header">
                             <h4 class="modal-title">Add Customer</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control" formControlName="name" required>
+                                <input type="text" class="form-control" name="name" [ngModel]="form.name" #name="ngModel" required>
                             </div>
                             <div class="form-group">
                                 <label>Surname</label>
-                                <input type="text" class="form-control" required>
+                                <input type="text" class="form-control" name="lastName" [ngModel]="form.lastname" #lastname="ngModel" required>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" required>
+                                <input type="email" class="form-control" name="email" [ngModel]="form.email" #email="ngModel" required>
                             </div>
                             <div class="form-group">
                                 <label>Birthday</label>
-                                <input type="date" class="form-control" required>
+                                <input type="date" class="form-control" name="birthday" [ngModel]="form.birthday" #birthday="ngModel" required>
                             </div>
                         </div>
                         <div class="modal-footer m-2">
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <!-- Edit Modal HTML -->
+        <!-- ADD Modal HTML -->
         <!-- Edit Modal HTML -->
         <div *ngIf="editCustomerButton" id="editCustomerModal" class="animate__animated animate__bounceInRight">
             <div class="modal-dialog">

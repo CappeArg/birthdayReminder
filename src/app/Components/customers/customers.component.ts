@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
 import { Customer } from 'src/app/Interfaces/customers';
-import Swal from 'sweetalert2';
+
 import { CustomersServiceService } from '../../Services/customers-service.service';
 
 @Component({
@@ -10,6 +12,13 @@ import { CustomersServiceService } from '../../Services/customers-service.servic
 })
 export class CustomersComponent implements OnInit {
 
+  form={
+    name: 'Pablo',
+    lastname:'Cappellacci',
+    email:'pablocappe@gmail.com',
+    birthday:'06/07/1989'};
+
+  customer: Customer;
   customers: Customer[];
   customerPerPage: number;
   totalItems:number;
@@ -50,24 +59,59 @@ export class CustomersComponent implements OnInit {
     // }))
     
 
-    this.customerService.deleteCustomers(
-    {
-           id: "wm4fm3oy5y1lnei",
-           name:"NuevaPrueba",
-           lastName: "PruebaLN",
-           email:    "probando@testing.com",
-           birthday:  "01/02/01"
-    }
+    // this.customerService.deleteCustomers(
+    // {
+    //        id: "wm4fm3oy5y1lnei",
+    //        name:"NuevaPrueba",
+    //        lastName: "PruebaLN",
+    //        email:    "probando@testing.com",
+    //        birthday:  "01/02/01"
+    // }
+    // ).subscribe(data=>{
+    //   if(data=""){
+    //     console.log("Se borro perfecto")
+    //   }
+    //   else{
+    //     console.log(data)
+    //   }
+    // })
+    
+  }
+
+
+
+  addCustomerForm(formAdd:NgForm){
+
+    this.customer = formAdd.form.value;
+    this.customer.birthday = new Date(formAdd.form.value.birthday).toISOString();
+    let {name, lastName, email, birthday} = this.customer
+
+    this.customerService.createCustomers({
+      name: name,
+      lastName: lastName,
+      email:    email,
+      birthday:   birthday
+    }).subscribe(data => {
+      console.log(data)
+    })
+
+   return console.log(this.customer)
+  }
+
+  deleteCustomer(customer){
+    console.log("el customer es:" + customer.lastName)
+    
+    this.customerService.deleteCustomers( customer.id
     ).subscribe(data=>{
-      if(data=""){
+      if(data == null){
         console.log("Se borro perfecto")
       }
       else{
         console.log(data)
       }
     })
-    
   }
+
 
   addCustomerWindow(){
     // console.log("prueba")
