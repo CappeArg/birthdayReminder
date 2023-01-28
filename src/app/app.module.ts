@@ -13,6 +13,8 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 
 @NgModule({
@@ -24,14 +26,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TodaysCardComponent,
     HeaderComponent,
     NavbarComponent,
-  ],
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

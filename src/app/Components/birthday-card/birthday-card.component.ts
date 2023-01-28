@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BirthdayCardServiceService } from '../../Services/birthday-card-service.service';
 
 @Component({
   selector: 'app-birthday-card',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BirthdayCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private birthdayService:BirthdayCardServiceService) { }
 
   ngOnInit(): void {
+    this.birthdayService.todayBirthdays.subscribe(customers => {
+      console.log("Recibiendo datos")
+      console.log(customers)
+    })
   }
 
 }

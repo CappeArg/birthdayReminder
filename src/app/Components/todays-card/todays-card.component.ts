@@ -10,6 +10,7 @@ export class TodaysCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

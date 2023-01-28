@@ -23,14 +23,10 @@ export class CustomersServiceService {
   };
 
   editCustomers(customer:Customer):Observable<any>{
-    return this.http.patch(this.path + "/:id",customer, {
-      params: {
-        path: customer.id
-      }
-    })
+    return this.http.patch(this.path + "/" + customer.id, customer)
   }
 //Maybe I can change an item like unvailable 
   deleteCustomers(id:string):Observable<any>{
-    return this.http.delete(this.path + "/"+ id)
+    return this.http.delete(this.path + "/"+ id);
   }
 }
