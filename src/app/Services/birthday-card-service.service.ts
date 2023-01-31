@@ -6,6 +6,8 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 export class BirthdayCardServiceService {
 
   @Output() todayBirthdays:EventEmitter<any> = new EventEmitter
+  
 
   constructor() { }
+  
 }

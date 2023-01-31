@@ -23,96 +23,73 @@ export class CustomersComponent implements OnInit {
   addCustomerButton:boolean=false;
   editCustomerButton:boolean=false;
 
-  constructor(private customerService : CustomersServiceService) { }
+  constructor(private customerService : CustomersServiceService,
+              private birthdayService: BirthdayCardServiceService) { }
 
   ngOnInit() {
 
 
-    this.customerService.getCustomers().subscribe(customers=>{
-      this.customers = customers.items
-      this.customerPerPage = customers.perPage
-      this.totalItems = customers.totalItems
-      this.totalPages = customers.totalPages
+    this.customerService.getCustomers().subscribe(({ items, perPage, totalItems, totalPages }) => {
+      this.customers = items;
+      this.customerPerPage = perPage;
+      this.totalItems = totalItems;
+      this.totalPages = totalPages;
+      this.birthdayService.todayBirthdays.emit(this.customers);
     });
 
   }
 
-  getCustomers(){
-    this.customerService.getCustomers().subscribe(customers=>{
-      this.customers = customers.items
-      this.customerPerPage = customers.perPage
-      this.totalItems = customers.totalItems
-      this.totalPages = customers.totalPages
+  private extractCustomersData(customers) {
+    this.customers = customers.items;
+    this.customerPerPage = customers.perPage;
+    this.totalItems = customers.totalItems;
+    this.totalPages = customers.totalPages;
+  }
+  
+  getCustomers() {
+    this.customerService.getCustomers()
+      .subscribe(customers => this.extractCustomersData(customers));
+  }
+  AddCustomerWindow() {
+    this.addCustomerButton = !this.addCustomerButton;
+    this.form = {
+      name: 'Name',
+      lastName: 'Last Name',
+      email: 'Email',
+      birthday: new Date(),
+    };
+  }
+  addCustomerForm(formAdd: NgForm) {
+    const customer = formAdd.form.value;
+    customer.birthday = new Date(customer.birthday).toISOString();
+    this.customerService.createCustomers(customer)
+      .subscribe(() => {
+        this.getCustomers();
+        this.AddCustomerWindow();
+      });
+  }  
+
+  deleteCustomer(customer:Customer) {
+    this.customerService.deleteCustomers(customer.id).subscribe(res => {
+      if (!res) {
+        console.log("Deleted successfully");
+        this.getCustomers();
+      } else {
+        console.log(res);
+      }
     });
-    
   }
-  addCustomerWindow(){
-    // console.log("prueba")
-    if(this.addCustomerButton){
-      this.addCustomerButton = false
-    }else{
-      this.addCustomerButton = true;
-    }
+
+  EditWindow(customer) {
+    this.editCustomerButton = !this.editCustomerButton;
     this.form = {
-      name: "Name",
-      lastName: "lastName",
-      email: "email",
-      birthday: new Date()
-    } 
-  }
-
-  addCustomerForm(formAdd:NgForm){
-
-    this.customer = formAdd.form.value;
-    this.customer.birthday = new Date(formAdd.form.value.birthday).toISOString();
-    let {name, lastName, email, birthday} = this.customer
-
-    this.customerService.createCustomers({
-      name: name,
-      lastName: lastName,
-      email:    email,
-      birthday:   birthday
-    }).subscribe(data => {
-      console.log(data)
-      this.getCustomers()
-    })
-
-    this.addCustomerWindow()
-    
-   return console.log(this.customer)
-   
-  }
-
-  deleteCustomer(customer){
-    console.log("el customer es:" + customer.lastName)
-    
-    this.customerService.deleteCustomers( customer.id
-    ).subscribe(data=>{
-      if(data == null){
-        console.log("Se borro perfecto")
-        this.getCustomers()
-
-      }
-      else{
-        console.log(data)
-      }
-    })
-  }
-
-  editCustomerWindow(customer){
-    if(this.editCustomerButton){
-      this.editCustomerButton = false
-    }else{
-      this.editCustomerButton = true;
-    }
-    this.form = {
-      id:customer.id,
+      id: customer.id,
       name: customer.name,
       lastName: customer.lastName,
       email: customer.email,
       birthday: new Date(customer.birthday)
-    }
-    }
+    };
+  }
 
   editCustomer(formEdit:NgForm){
 
@@ -131,7 +108,7 @@ export class CustomersComponent implements OnInit {
   ).subscribe(data=>{
     console.log(data)
     this.getCustomers()
-    this.editCustomerWindow(this.customer)
+    this.EditWindow(this.customer)
   })
   console.log(this.customer)
 } 
