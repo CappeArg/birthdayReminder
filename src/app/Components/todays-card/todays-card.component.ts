@@ -9,14 +9,15 @@ import { BirthdayCardServiceService } from '../../Services/birthday-card-service
 })
 export class TodaysCardComponent implements OnInit {
   
-  birthdayCards:Customer[];
-  constructor(private birthdayService:BirthdayCardServiceService) { }
+  birthdayCards;
+
+  constructor(private birthdayService:BirthdayCardServiceService){
+   }
 
   ngOnInit(): void {
-    this.birthdayService.todayBirthdays.subscribe(customers => {
-      this.birthdayCards = customers;
-      console.log(this.birthdayCards);
-    })
-     
-  }
+    this.birthdayService.getCustomersBirthday().subscribe(data=>{
+      this.birthdayCards = data;
+    });
+    console.log(this.birthdayCards)
+}
 }

@@ -10,13 +10,11 @@ import { BirthdayCardServiceService } from '../../Services/birthday-card-service
 export class BirthdayCardComponent implements OnInit {
 
   birthdayCards:Customer[];
-  constructor(private birthdayService:BirthdayCardServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.birthdayService.todayBirthdays.subscribe(customers => {
-      this.birthdayCards = customers;
-      
-    })
+
+
     
     
   }
