@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/Interfaces/customers';
-import { BirthdayCardServiceService } from '../../Services/birthday-card-service.service';
 
 @Component({
   selector: 'app-birthday-card',

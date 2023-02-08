@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/Interfaces/customers';
-import { BirthdayCardServiceService } from '../../Services/birthday-card-service.service';
+import { CustomersServiceService } from '../../Services/customers-service.service';
 
 @Component({
   selector: 'app-todays-card',
@@ -9,15 +9,27 @@ import { BirthdayCardServiceService } from '../../Services/birthday-card-service
 })
 export class TodaysCardComponent implements OnInit {
   
-  birthdayCards;
+  customers:Customer[];
+  birthdayCards:Customer[];
 
-  constructor(private birthdayService:BirthdayCardServiceService){
+  today = new Date().toISOString();
+
+  constructor(private CustomersService: CustomersServiceService){
+    
    }
 
-  ngOnInit(): void {
-    this.birthdayService.getCustomersBirthday().subscribe(data=>{
-      this.birthdayCards = data;
+  ngOnInit(): void {   
+    this.CustomersService.getCustomers().subscribe(data => {
+      this.customers = data.items;
+      console.log(this.customers);
+      for (let i = 0; i < this.customers.length; i++) {
+        if (this.customers[i].birthday.slice(5, 7) !== this.today.slice(5, 7)) {
+          this.customers.splice(i, 1);
+          i--;
+        }
+      }
     });
-    console.log(this.birthdayCards)
+  }
+
 }
-}
+

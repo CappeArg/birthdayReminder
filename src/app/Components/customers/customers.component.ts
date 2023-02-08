@@ -4,8 +4,6 @@ import { NgForm } from '@angular/forms';
 import { Customer } from 'src/app/Interfaces/customers';
 
 import { CustomersServiceService } from '../../Services/customers-service.service';
-import { BirthdayCardServiceService } from '../../Services/birthday-card-service.service';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
@@ -24,16 +22,21 @@ export class CustomersComponent implements OnInit {
   addCustomerButton:boolean=false;
   editCustomerButton:boolean=false;
 
-  constructor(private customerService : CustomersServiceService,
-              private birthdayService: BirthdayCardServiceService) { }
+  constructor(private customerService : CustomersServiceService) { }
 
-              ngOnInit() {
-                this.customerService.getCustomers()
-                .pipe(map(customers => {
-                this.extractCustomersData(customers);
-                this.birthdayService.changeCustomerBirthday(this.customers);
-                })).subscribe();
-                }
+  ngOnInit() {
+
+
+    this.customerService.getCustomers().subscribe(({ items, perPage, totalItems, totalPages }) => {
+      this.customers = items;
+      this.customerPerPage = perPage;
+      this.totalItems = totalItems;
+      this.totalPages = totalPages;
+      
+    });
+
+  }
+
   private extractCustomersData(customers) {
     this.customers = customers.items;
     this.customerPerPage = customers.perPage;
