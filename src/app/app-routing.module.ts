@@ -11,6 +11,7 @@ const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'customers', component: CustomersComponent},
   {path: 'customer', component: ModalCustomerComponent},
+  {path: 'customer/:id', component: ModalCustomerComponent},
   {path: 'tcards', component: TodaysCardComponent},
   {path: '**', pathMatch:'full', redirectTo: 'home' }
 ];

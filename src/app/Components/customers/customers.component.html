@@ -30,7 +30,7 @@
                                                 <td>{{customer.email}}</td>
                                                 <td>{{customer.birthday | date }}</td>
                                                 <td>
-                                                    <a [routerLink]="['/customer']" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                    <a [routerLink]="['customer', customer.id]" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                                     <a (click)="deleteCustomer(customer)" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                 </td>
                                             </tr>

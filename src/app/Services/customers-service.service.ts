@@ -29,4 +29,8 @@ export class CustomersServiceService {
   deleteCustomers(id:string):Observable<any>{
     return this.http.delete(this.path + "/"+ id);
   }
+  
+  viewCustomer(id:string):Observable<any>{
+    return this.http.get(this.path + id)
+  }
 }
