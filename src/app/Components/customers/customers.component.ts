@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 
 import { Customer } from 'src/app/Interfaces/customers';
 
 import { CustomersServiceService } from '../../Services/customers-service.service';
+
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-customers',
@@ -43,21 +45,41 @@ export class CustomersComponent implements OnInit {
     this.totalPages = customers.totalPages;
   }
   
-  getCustomers() {
-    this.customerService.getCustomers()
-      .subscribe(customers => this.extractCustomersData(customers));
+  async getCustomers() {
+    const customers = await this.customerService.getCustomers().toPromise();
+    this.extractCustomersData(customers);
   }
   
 
-  deleteCustomer(customer:Customer) {
-    this.customerService.deleteCustomers(customer.id).subscribe(res => {
-      if (!res) {
-        console.log("Deleted successfully");
-        this.getCustomers();
-      } else {
-        console.log(res);
-      }
+  async deleteCustomer(customer: Customer) {
+    const result = await Swal.fire({
+      title: 'Are you really sure about it?',
+      text: "You won't be able to undo the action",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete',
+      cancelButtonText: 'Cancel'
     });
+  
+    if (result.isConfirmed) {
+      const res = await this.customerService.deleteCustomers(customer.id).toPromise();
+      if (!res) {
+        await Swal.fire(
+          'Deleted',
+          'The customer was delete successfully.',
+          'success'
+        );
+        await this.getCustomers();
+      } else {
+        await Swal.fire(
+          'Error',
+          'Error, please try again',
+          'error'
+        );
+      }
+    }
   }
 
 

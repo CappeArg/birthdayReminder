@@ -24,14 +24,25 @@ export class ModalCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // const customerId = this.route.snapshot.paramMap.get('id');
+    const customerId = this.route.snapshot.paramMap.get('id');
+    if(customerId === null){
     this.form = {
       name: 'Name',
       lastName: 'Last Name',
       email: 'Email',
       birthday: new Date(),
     };
-    
+  }else{
+    this.customerService.viewCustomer(customerId).subscribe((data)=>{
+      this.form={
+        name: data.name,
+        lastName: data.lastName,
+        email: data.email,
+        birthday: new Date(data.birthday).toLocaleDateString().split('/').sort().concat('/')
+      }
+    })
+  }
+
   }
 
 
