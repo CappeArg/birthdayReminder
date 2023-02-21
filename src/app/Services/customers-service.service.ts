@@ -41,10 +41,4 @@ export class CustomersServiceService {
     return this.pb.collection('customers').getOne(id);
   }
 
-  viewCustomer(id:string):Observable<any>{
-    return this.http.get(this.path + "/" + id)
-  }
-
-
-
 }
