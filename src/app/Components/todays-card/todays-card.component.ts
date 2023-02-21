@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from 'src/app/Interfaces/customers';
 import { CustomersServiceService } from '../../Services/customers-service.service';
 
 @Component({
@@ -9,8 +8,8 @@ import { CustomersServiceService } from '../../Services/customers-service.servic
 })
 export class TodaysCardComponent implements OnInit {
   
-  customers:Customer[];
-  birthdayCards:Customer[];
+  customers:any[];
+  birthdayCards:any[];
 
   today = new Date().toISOString();
 
@@ -18,18 +17,14 @@ export class TodaysCardComponent implements OnInit {
     
    }
 
-  ngOnInit(): void {   
-    this.CustomersService.getCustomers().subscribe(data => {
-      this.customers = data.items;
-      console.log(this.customers);
-      for (let i = 0; i < this.customers.length; i++) {
-        if (this.customers[i].birthday.slice(5, 7) !== this.today.slice(5, 7)) {
-          this.customers.splice(i, 1);
-          i--;
-        }
-      }
+   async ngOnInit() {   
+    const allCustomers = await this.CustomersService.getRecords();
+    const todayMonth = this.today.slice(5, 7);
+    this.customers = allCustomers.filter(customer => {
+      const customerMonth = customer['birthday'].slice(5, 7);
+      return customerMonth === todayMonth;
     });
   }
 
-}
+  }
 

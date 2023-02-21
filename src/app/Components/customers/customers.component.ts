@@ -16,38 +16,23 @@ export class CustomersComponent implements OnInit {
 
 
   customer: Customer;
-  customers: Customer[];
+  customers: any [];
   customerPerPage: number;
   totalItems:number;
   totalPages:number;
-  addCustomerButton:boolean=false;
-  editCustomerButton:boolean=false;
 
   constructor(private customerService : CustomersServiceService) { }
 
-  ngOnInit() {
+ async ngOnInit() {
 
+    await this.getCustomers()
 
-    this.customerService.getCustomers().subscribe(({ items, perPage, totalItems, totalPages }) => {
-      this.customers = items;
-      this.customerPerPage = perPage;
-      this.totalItems = totalItems;
-      this.totalPages = totalPages;
-      
-    });
-
+    this.customerPerPage, this.totalItems = this.customers.length
   }
 
-  private extractCustomersData(customers) {
-    this.customers = customers.items;
-    this.customerPerPage = customers.perPage;
-    this.totalItems = customers.totalItems;
-    this.totalPages = customers.totalPages;
-  }
   
-  async getCustomers() {
-    const customers = await this.customerService.getCustomers().toPromise();
-    this.extractCustomersData(customers);
+   async getCustomers() {
+    this.customers = await this.customerService.getRecords();
   }
   
 
@@ -64,23 +49,27 @@ export class CustomersComponent implements OnInit {
     });
   
     if (result.isConfirmed) {
-      const res = await this.customerService.deleteCustomers(customer.id).toPromise();
-      if (!res) {
+      const res = await this.customerService.deleteRecord(customer.id);
+      if (this.okDelete(customer.id, this.customers)) {
         await Swal.fire(
           'Deleted',
           'The customer was delete successfully.',
           'success'
         );
-        await this.getCustomers();
+        this.getCustomers()
       } else {
         await Swal.fire(
           'Error',
           'Error, please try again',
           'error'
-        );
+        );  
       }
     }
+ 
   }
 
+  okDelete(idSearch, customers){
+   return customers.find(customer => customer.id === idSearch);
+  }
 
   }
