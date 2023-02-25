@@ -33,6 +33,9 @@ export class CustomersComponent implements OnInit {
   
    async getCustomers() {
     this.customers = await this.customerService.getRecords();
+    this.customers.forEach(element => {
+      element.birthday = new Date(element.birthday).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
+    });
   }
   
 

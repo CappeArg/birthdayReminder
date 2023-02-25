@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import PocketBase from 'pocketbase';
 
 import { Customer } from '../Interfaces/customers';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CustomersServiceService {
 
-  path:string="http://127.0.0.1:8090/api/collections/customers/records"
-  pb = new PocketBase('http://127.0.0.1:8090');
+  url:string = environment.URLBASE
+  pb = new PocketBase(this.url);
+  
 
   
 
-  constructor(private http : HttpClient) { }
+  constructor() { }
 
 
   getRecords(){

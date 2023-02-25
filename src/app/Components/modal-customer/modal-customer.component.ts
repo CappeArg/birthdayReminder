@@ -38,7 +38,7 @@ export class ModalCustomerComponent implements OnInit {
   }else{
      this.customer = await this.customerService.viewRecord(customerId);
      console.log(this.customer)
-     const date = new Date( this.customer.birthday )
+     const date = new Date( this.customer.birthday ).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
       this.form={
         name: this.customer.name,
         lastName: this.customer.lastName,
@@ -73,7 +73,7 @@ export class ModalCustomerComponent implements OnInit {
     try {
       this.customer = formEdit.form.value;
       this.customer.id = this.route.snapshot.paramMap.get('id')
-      this.customer.birthday = new Date(formEdit.form.value.birthday).toISOString();
+      this.customer.birthday = new Date(formEdit.form.value.birthday).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
   
       const response = await this.customerService.editRecord(
         this.customer

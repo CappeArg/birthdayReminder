@@ -3,15 +3,14 @@
         <div class="row">
             <div class="col text-center mb-5">
                 <h1 class="display-4">Happy Birthday's Cards!!</h1>
-                <div class="container animate__animated animate__bounceOutRight animate__slower animate__delay-5s">
-                    <p class="lead">You can save time hiring a guy like me, think about it</p>
+                <div class="container animate__animated animate__bounceOut animate__slower animate__delay-5s">
+                    <p class="lead">We love happy birthdays!!</p>
                 </div>
             </div>
         </div>
-        <div *ngFor="let card of customers" class="row animate__animated animate__bounceInRight">
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card text-white card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?birthday');">
-                    <img class="card-img d-none" src="https://source.unsplash.com/600x900/?birthday" alt="Happy Birthday!">
+        <div class="row animate__animated animate__bounceInRight">
+            <div *ngFor="let card of customers" class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div id="{{card.name}}" class="my-card card text-white card-has-bg click-col card-{{card.name}}" style="background-image:url('../../../assets/aneta-pawlik-d8s13D29QiE-unsplash.jpg');"> <img class="card-img d-none" src="" alt="Happy Birthday!">
                     <div class="card-img-overlay d-flex flex-column">
                         <div class="card-body">
                             <small class="card-meta mb-2">Dear {{card.name}} {{ card.lastName }}</small>
@@ -20,7 +19,6 @@
                         </div>
                         <div class="card-footer">
                             <div class="media">
-                                <img class="mr-3 rounded-circle" src="https://assets.codepen.io/460692/internal/avatars/users/default.png" alt="Generic placeholder image" style="max-width:50px">
                                 <div class="media-body">
                                     <h6 class="my-0 text-white d-block">The company</h6>
                                     <small>We make happy birthdays :-D</small>
@@ -29,4 +27,5 @@
                         </div>
                     </div>
                 </div>
+                <button (click)="downloadImage(card.name)" class="btn btn-primary m-2 text-center">Descargar imagen</button>
             </div>
