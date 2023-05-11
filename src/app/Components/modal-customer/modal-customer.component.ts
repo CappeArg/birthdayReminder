@@ -5,6 +5,7 @@ import { CustomersServiceService } from '../../Services/customers-service.servic
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { CustomerService } from 'src/app/Services/customer.service';
 
 
 
@@ -16,10 +17,12 @@ import { ActivatedRoute } from '@angular/router';
 export class ModalCustomerComponent implements OnInit {
 
   customer: any;
+  collectionName:string = 'customers'
   form:any;
   add:boolean = false;
 
   constructor(private customerService: CustomersServiceService,
+              private service: CustomerService,
               private router:Router,
               private route:ActivatedRoute) { }
 
@@ -36,15 +39,25 @@ export class ModalCustomerComponent implements OnInit {
       birthday: new Date(),
     };
   }else{
-     this.customer = await this.customerService.viewRecord(customerId);
-     console.log(this.customer)
-     const date = new Date( this.customer.birthday ).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
-      this.form={
+    this.service.get(customerId,this.collectionName).subscribe(data=>{
+      Swal.showLoading()
+      this.customer = data
+      this.form = {
         name: this.customer.name,
         lastName: this.customer.lastName,
         email: this.customer.email,
-        birthday: date
+        birthday: this.customer.birthday
       }
+      Swal.close()
+    //  this.customer = await this.customerService.viewRecord(customerId);
+    //  console.log(this.customer)
+    //  const date = new Date( this.customer.birthday ).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
+    //   this.form={
+    //     name: this.customer.name,
+    //     lastName: this.customer.lastName,
+    //     email: this.customer.email,
+    //     birthday: date
+    //   }
 
   }
 
@@ -90,4 +103,5 @@ export class ModalCustomerComponent implements OnInit {
 
   }
 
+}
 }

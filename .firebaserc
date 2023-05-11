@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "birthday-reminder-4310c"
+  },
+  "targets": {
+    "birthday-reminder-4310c": {
+      "hosting": {
+        "birthdayReminder": [
+          "birthday-reminder-4310c"
+        ]
+      }
+    }
   }
 }

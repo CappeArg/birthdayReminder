@@ -102,6 +102,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "birthdayReminder:build:production",
+            "firebaseProject": "birthday-reminder-4310c",
+            "firebaseHostingSite": "birthday-reminder-4310c"
+          }
         }
       }
     }

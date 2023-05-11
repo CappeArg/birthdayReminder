@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CustomersComponent } from './Components/customers/customers.component';
-import { BirthdayCardComponent } from './Components/birthday-card/birthday-card.component';
 import { HomeComponent } from './Components/home/home.component';
 import { TodaysCardComponent } from './Components/todays-card/todays-card.component';
 import { HeaderComponent } from './Components/header/header.component';
@@ -23,7 +22,6 @@ import { ModalCustomerComponent } from './Components/modal-customer/modal-custom
   declarations: [
     AppComponent,
     CustomersComponent,
-    BirthdayCardComponent,
     HomeComponent,
     TodaysCardComponent,
     HeaderComponent,

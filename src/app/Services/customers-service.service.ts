@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
 import PocketBase from 'pocketbase';
 
 import { Customer } from '../Interfaces/customers';
@@ -19,27 +18,27 @@ export class CustomersServiceService {
   constructor() { }
 
 
-  getRecords(){
-    return this.pb.collection('customers').getFullList(200 /* batch size */, {
-      sort: '-created',
-  });
-  } 
+  // getRecords(){
+  //   return this.pb.collection('customers').getFullList(200 /* batch size */, {
+  //     sort: '-created',
+  // });
+  // } 
 
-   deleteRecord(id){
-    return this.pb.collection('customers').delete(id);
-   }
+  //  deleteRecord(id){
+  //   return this.pb.collection('customers').delete(id);
+  //  }
 
-   createRecord(customer: Customer){
-    return this.pb.collection('customers').create(customer);
-   } 
+  //  createRecord(customer: Customer){
+  //   return this.pb.collection('customers').create(customer);
+  //  } 
 
 
-  editRecord(customer:Customer){
-    return this.pb.collection('customers').update(customer.id, customer);
-  }
+  // editRecord(customer:Customer){
+  //   return this.pb.collection('customers').update(customer.id, customer);
+  // }
   
-  viewRecord(id:string){
-    return this.pb.collection('customers').getOne(id);
-  }
+  // viewRecord(id:string){
+  //   return this.pb.collection('customers').getOne(id);
+  // }
 
 }
