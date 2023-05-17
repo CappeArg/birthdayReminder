@@ -1,14 +1,16 @@
 {
   "projects": {
-    "default": "birthday-reminder-4310c"
+    "default": "portfolioprod-576cd",
+    "PortFolio": "portfolioprod-576cd"
   },
   "targets": {
-    "birthday-reminder-4310c": {
+    "portfolioprod-576cd": {
       "hosting": {
-        "birthdayReminder": [
-          "birthday-reminder-4310c"
+        "portfolioprod": [
+          "portfolioprod-576cd"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }
