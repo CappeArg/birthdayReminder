@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { CustomersServiceService } from '../../Services/customers-service.service';
 import html2canvas from 'html2canvas';
+import { CustomerService } from 'app/Services/customer.service';
 
 @Component({
   selector: 'app-todays-card',
@@ -11,26 +12,30 @@ export class TodaysCardComponent implements OnInit {
   
   customers:any[];
   birthdayCards:any[];
+  collectionName:string="Customers";
 
   today = new Date().toISOString();
 
-  constructor(private CustomersService: CustomersServiceService){
+  constructor(
+    // private CustomersService: CustomersServiceService,
+              private service: CustomerService){
     
    }
 
-   async ngOnInit() {   
-    const allCustomers = await this.CustomersService.getRecords();
-    const todayMonth = this.today.slice(5, 7);
-    this.customers = allCustomers.filter(customer => {
-      const customerMonth = customer['birthday'].slice(5, 7);
-      return customerMonth === todayMonth;
+   async ngOnInit() {
+    await this.service.getAll(this.collectionName).subscribe(data => {
+      this.customers = data;
+      console.log(data);
+  
+      const todayMonth = this.today.slice(5, 10);
+      console.log(todayMonth);
+  
+      this.customers = this.customers.filter(customer => {
+        const customerBirthday = customer['birthday'].slice(5, 10);
+        return customerBirthday === todayMonth;
+      });
     });
-
-    this.customers.forEach(element=>{
-      element.birthday = new Date(element.birthday).toISOString().replace("T00:00:00.000Z", "").replace(" 00:00:00.000Z", "");
-    })
   }
-
   downloadImage(n) {
     // Selecciona el elemento HTML que deseas convertir en una imagen
     const element = document.getElementById(n) as HTMLElement
@@ -53,5 +58,7 @@ export class TodaysCardComponent implements OnInit {
       document.body.removeChild(link);
     });
   }
+
 }
 
+  

@@ -9,8 +9,8 @@ import { environment } from '../../environments/environment';
 })
 export class CustomersServiceService {
 
-  url:string = environment.URLBASE
-  pb = new PocketBase(this.url);
+  // url:string = environment.URLBASE
+  // pb = new PocketBase(this.url);
   
 
   

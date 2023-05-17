@@ -13,8 +13,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CRUDComponent } from './Components/crud/crud.component';
 import { ModalCustomerComponent } from './Components/modal-customer/modal-customer.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -27,7 +29,6 @@ import { ModalCustomerComponent } from './Components/modal-customer/modal-custom
     HeaderComponent,
     NavbarComponent,
     ModalCustomerComponent,
-    CRUDComponent,
       ],
   imports: [
     BrowserModule,
@@ -36,7 +37,9 @@ import { ModalCustomerComponent } from './Components/modal-customer/modal-custom
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

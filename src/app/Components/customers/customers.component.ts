@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Customer } from 'src/app/Interfaces/customers';
 
 import { CustomersServiceService } from '../../Services/customers-service.service';
 
 import Swal from 'sweetalert2';
-import { CustomerService } from 'src/app/Services/customer.service';
+// import { CustomerService } from 'src/app/Services/customer.service';
+import { Customer } from 'app/Interfaces/customers';
+import { CustomerService } from 'app/Services/customer.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { CustomerService } from 'src/app/Services/customer.service';
 export class CustomersComponent implements OnInit {
 
   // list:Customer[];
-  collectionName:string = "customers"
+  collectionName:string = "Customers"
 
   customer: Customer;
   customers: any [];
@@ -24,7 +25,8 @@ export class CustomersComponent implements OnInit {
   totalItems:number;
   totalPages:number;
 
-  constructor(private customerService : CustomersServiceService,
+  constructor(
+    // private customerService : CustomersServiceService,
               private service: CustomerService) { }
 
  async ngOnInit() {
