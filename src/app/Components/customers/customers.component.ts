@@ -26,7 +26,6 @@ export class CustomersComponent implements OnInit {
   totalPages:number;
 
   constructor(
-    // private customerService : CustomersServiceService,
               private service: CustomerService) { }
 
  async ngOnInit() {
@@ -79,7 +78,7 @@ export class CustomersComponent implements OnInit {
       if (response == undefined) {
         await Swal.fire(
           'Deleted',
-          'The service was delete successfully.',
+          'The Customer was delete successfully.',
           'success'
         );
    } else {
